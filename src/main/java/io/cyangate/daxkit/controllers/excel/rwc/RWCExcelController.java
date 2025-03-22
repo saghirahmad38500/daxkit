@@ -32,8 +32,19 @@ public class RWCExcelController extends BaseController<RWCExcelInputDTO, RWCExce
             @ApiResponse(responseCode = "200", description = "Success",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RWCExcelOutputDTO.class)) })})
-    @PostMapping(path = "/rwc-bynder-rows", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RWCExcelOutputDTO makeExcelRequestForBynderAssets(@Validated @RequestBody List<RWCExcelInputDTO> rwcExcelInputDTOs) {
+    @PostMapping(path = "/rwc-single", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RWCExcelOutputDTO makeSingleRow(@Validated @RequestBody RWCExcelInputDTO rwcExcelInputDTOs) {
+
+        return super.convertToDTO(rwcExcelInputDTOs);
+
+    }
+    @Operation(summary = "Makes Excel Rows for Given Bynder Assets")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = RWCExcelOutputDTO.class)) })})
+    @PostMapping(path = "/rwc-collection", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RWCExcelOutputDTO makeMultipleRows(@Validated @RequestBody List<RWCExcelInputDTO> rwcExcelInputDTOs) {
 
         return super.convertListToDTO(rwcExcelInputDTOs);
 
