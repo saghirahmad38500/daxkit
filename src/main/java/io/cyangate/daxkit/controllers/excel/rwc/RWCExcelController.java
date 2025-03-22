@@ -27,7 +27,7 @@ public class RWCExcelController extends BaseController<RWCExcelInputDTO, RWCExce
         super(new RWCExcelDTOMapper(), new RWCExcelValidator());
     }
 
-    @Operation(summary = "Makes Excel Rows for Given Bynder Assets")
+    @Operation(summary = "Makes Excel Rows for a Given Bynder Asset")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = { @Content(mediaType = "application/json",
