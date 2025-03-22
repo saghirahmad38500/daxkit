@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 public class BaseController<I extends BaseInputDTO, O extends BaseOutputDTO> {
@@ -20,6 +22,18 @@ public class BaseController<I extends BaseInputDTO, O extends BaseOutputDTO> {
         try {
             validator.validate(inputDTO);
             return baseDTOMapper.convertToDTO(inputDTO);
+        }
+        catch (ValidationFailed e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+    protected O convertListToDTO(List<I> inputDTO) {
+        try {
+            validator.validate(inputDTO);
+            return baseDTOMapper.convertListToDTO(inputDTO);
         }
         catch (ValidationFailed e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
