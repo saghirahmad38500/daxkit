@@ -39,7 +39,7 @@ public class RWCExcelDTOMapper implements BaseDTOMapper<RWCExcelInputDTO, RWCExc
 
         ArrayList<String> cellValues = new ArrayList<>();
 
-        String fileName = String.join(".", inputDTO.getName(), inputDTO.getExtension().getFirst()).replaceAll(" ", "");
+        String fileName = String.join(".", inputDTO.getName().trim(), inputDTO.getExtension().getFirst());
         String description = inputDTO.getDescription() != null ? inputDTO.getDescription() : "";
         String assetResolution = String.join("x", inputDTO.getWidth().toString(), inputDTO.getHeight().toString());
         String assetType = inputDTO.getProperty_Asset_Type() != null ? String.join(", ", inputDTO.getProperty_Asset_Type()) : "" ;
