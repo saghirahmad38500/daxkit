@@ -24,7 +24,7 @@ public class SplitByCountDTOMapper implements BaseDTOMapper<ListToSubListsInputD
                     int fromIndex = i * sublistSize + Math.min(i, remainder);
                     int toIndex = fromIndex + sublistSize + (i < remainder ? 1 : 0);
                     return new ArrayList<>(list.subList(fromIndex, toIndex));
-                })
+                }).filter(array -> !array.isEmpty())
                 .collect(Collectors.toList());
 
         return new ListToSubListsOutputDTO(listOfLists);
